@@ -2,10 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://straughan.github.io/PAC/about.html</loc>
-    <lastmod>2026-03-24T13:26:12.840Z</lastmod>
+    <lastmod>2026-03-24T14:04:28.721Z</lastmod>
+  </url>
+  <url>
+    <loc>https://straughan.github.io/PAC/Models/model1.html</loc>
+    <lastmod>2026-03-24T14:04:28.698Z</lastmod>
   </url>
   <url>
     <loc>https://straughan.github.io/PAC/index.html</loc>
-    <lastmod>2026-03-24T13:26:12.840Z</lastmod>
+    <lastmod>2026-03-24T14:04:28.721Z</lastmod>
+  </url>
+  <url>
+    <loc>https://straughan.github.io/PAC/Models/model2.html</loc>
+    <lastmod>2026-03-24T14:04:28.699Z</lastmod>
   </url>
 </urlset>
