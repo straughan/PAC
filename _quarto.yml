@@ -12,7 +12,7 @@ website:
           - text: Model 1
             href: Models/model1.qmd
           - text: Model 2
-            href: Models/model2.ipynb
+            href: Models/model2.qmd
 
 format:
   html:
