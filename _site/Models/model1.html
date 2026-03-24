@@ -160,8 +160,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prompt-gemini" id="toc-prompt-gemini" class="nav-link active" data-scroll-target="#prompt-gemini">Prompt (Gemini)</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link active" data-scroll-target="#question-1">Question 1</a>
+  <ul class="collapse">
+  <li><a href="#prompt-gemini" id="toc-prompt-gemini" class="nav-link" data-scroll-target="#prompt-gemini">Prompt (Gemini)</a></li>
   <li><a href="#python-plotnine" id="toc-python-plotnine" class="nav-link" data-scroll-target="#python-plotnine">Python + plotnine</a></li>
+  </ul></li>
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
   <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a>
@@ -191,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Question 1</h1>
+<h1 class="title">Model 1</h1>
 </div>
 
 
@@ -208,6 +211,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="question-1" class="level1">
+<h1>Question 1</h1>
 <section id="prompt-gemini" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-gemini">Prompt (Gemini)</h2>
 <p>Give me Python + plotnine code for a cartesian line visualization that compares the use of Citi Bike versus the use of other modes of transportation over time from March 2020 through March 2021. The visualization should have the months represented on the x axis, usage percent change on a linear scale mapped to the y axis (100 descending to -100 displayed in increments of 10), and have horizontal (not vertical) separation lines across the visualization as a visual aid to mark the 10% increments. The Python + plotnine code will use a separate covid_ridership.csv file that contains the data.</p>
@@ -230,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="python-plotnine" class="level2">
 <h2 class="anchored" data-anchor-id="python-plotnine">Python + plotnine</h2>
-<div id="a99fbf7e" class="cell" data-execution_count="1">
+<div id="6d87b67a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -321,6 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
 <section id="question-2" class="level1">
 <h1>Question 2</h1>
 <p><strong>1. Grammar Alignment</strong></p>
@@ -371,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="python-plotnine-1" class="level3">
 <h3 class="anchored" data-anchor-id="python-plotnine-1">Python + plotnine</h3>
-<div id="74881966" class="cell" data-execution_count="2">
+<div id="41eb74e5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -489,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="python-plotnine-2" class="level3">
 <h3 class="anchored" data-anchor-id="python-plotnine-2">Python + plotnine</h3>
-<div id="3ee0681d" class="cell" data-execution_count="3">
+<div id="625234de" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
