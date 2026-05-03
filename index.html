@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Michael James Straughan">
+<meta name="dcterms.date" content="2026-04-22">
 
-<title>PAC</title>
+<title>Applied Machine Learning I: Predictive Analysis Competition – PAC</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -39,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b3419c0040ee7b290e087efc0aa89165.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-30ff5f89b22f1e48555d49e76e7369d1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,15 +104,63 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-models">    
         <li>
+    <a class="dropdown-item" href="./Models/basesubmission.html">
+ <span class="dropdown-text">Base Submission</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./Models/model1.html">
- <span class="dropdown-text">Model 1</span></a>
+ <span class="dropdown-text">Model 1 (Income)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Models/model2.html">
- <span class="dropdown-text">Model 2</span></a>
+ <span class="dropdown-text">Model 2 (Numeric Values)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model3.html">
+ <span class="dropdown-text">Model 3 (Categorical Variables)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model4.html">
+ <span class="dropdown-text">Model 4 (See What Sticks)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model5.html">
+ <span class="dropdown-text">Model 5 (Money Movement)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model6.html">
+ <span class="dropdown-text">Model 6 (Feature Selection)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model7.html">
+ <span class="dropdown-text">Model 7 (Trees)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model8.html">
+ <span class="dropdown-text">Model 8 (Ensemble Bagging)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model9.html">
+ <span class="dropdown-text">Model 9 (Gradient Boost)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model10.html">
+ <span class="dropdown-text">Model 10 (Tree Tuning)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model11.html">
+ <span class="dropdown-text">Model 11 (Optimized Ensemble)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Models/model12.html">
+ <span class="dropdown-text">Model 12 (SVR)</span></a>
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./Models/best.html"> 
+<span class="menu-text">Best Model</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -130,14 +180,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">PAC</h1>
+<h1 class="title">Applied Machine Learning I: Predictive Analysis Competition</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Michael James Straughan </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -147,8 +209,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+<p>Eleven models were developed for the competition, each using a different approach as taught in the course. After experimenting with various models, and with the aspects within each model, the best performing model was an optimized ensemble model, which can be viewed on the <a href="./Models/best.html">Best Model</a> page. All of the other models can be found in the Models section.</p>
 
 
 

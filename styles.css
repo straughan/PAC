@@ -1,1 +1,7 @@
-/* css styles */
+.cell-output-stdout pre {
+  background-color: #f8f9fa; /* Light gray background */
+  color: #212529;            /* Dark text color */
+  padding: 1em;
+  border-left: 4px solid #0d6efd; /* Blue accent bar */
+  font-weight: bold;
+}
