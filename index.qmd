@@ -1,7 +1,7 @@
 ---
-title: "PAC"
+title: "Applied Machine Learning I: Predictive Analysis Competition"
+author: "Michael James Straughan"
+date: "2026-04-22"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Eleven models were developed for the competition, each using a different approach as taught in the course. After experimenting with various models, and with the aspects within each model, the best performing model was an optimized ensemble model, which can be viewed on the [Best Model](Models/best.qmd) page. All of the other models can be found in the Models section.

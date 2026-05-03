@@ -1,0 +1,32 @@
+# Model 4 (See What Sticks)
+
+Because the numeric only model proved to be a good reduction, but the categorical was just a slight improvement on the base model, I added in everything to then move forward in future models through subtraction. Throwing everything at the wall here resulted in the best RMSE so far.
+
+```{python}
+#| warning: false
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+data = pd.read_csv('../PACFiles/analysis_data.csv')
+# Encode categorical variables as demonstrated in our class guides
+X = pd.get_dummies(data.drop(['customer_id', 'monthly_spend'], axis=1), drop_first=True).fillna(0)
+y = data.monthly_spend
+
+reg = LinearRegression()
+reg.fit(X,y)
+
+scoring_data = pd.read_csv('../PACFiles/scoring_data.csv')
+scoring_X = pd.get_dummies(scoring_data.drop(['customer_id'], axis=1), drop_first=True).fillna(0)
+# Aligning columns between training and scoring data
+scoring_X = scoring_X.reindex(columns=X.columns, fill_value=0)
+pred = reg.predict(scoring_X)
+
+submission_file = pd.DataFrame({'customer_id': scoring_data.customer_id, 'monthly_spend': pred})
+submission_file.to_csv('../PACFiles/submission_file_5.csv', index=False)
+
+from sklearn.metrics import root_mean_squared_error
+train_pred = reg.predict(X)
+rmse = root_mean_squared_error(y, train_pred)
+print("Training RMSE:", rmse)
+```

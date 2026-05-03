@@ -1,1 +1,33 @@
-# Model 2
+# Model 2 (Numeric Values)
+
+Because the first model didn't improve upon the base model all that much, I tried almost all of the numeric values. This resulted in a significantly better RMSE.
+
+```{python}
+#| warning: false
+
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Read data
+data = pd.read_csv('../PACFiles/analysis_data.csv')
+print(data.head())
+X = data.loc[:,['age', 'num_children', 'credit_score', 'owns_home', 'annual_income', 'has_auto_loan', 'num_credit_cards', 'credit_limit', 'num_transactions', 'tenure', 'avg_transaction_value', 'reward_points_balance', 'travel_frequency']]
+y = data.monthly_spend
+reg = LinearRegression()
+reg.fit(X,y)
+
+# Apply model
+scoring_data = pd.read_csv('../PACFiles/scoring_data.csv')
+scoring_data_X = scoring_data.loc[:,['age', 'num_children', 'credit_score', 'owns_home', 'annual_income', 'has_auto_loan', 'num_credit_cards', 'credit_limit', 'num_transactions', 'tenure', 'avg_transaction_value', 'reward_points_balance', 'travel_frequency']]
+pred = reg.predict(scoring_data_X)
+
+# Construct submission
+submission_file = pd.DataFrame({'customer_id': scoring_data.customer_id, 'monthly_spend': pred})
+submission_file.to_csv('../PACFiles/submission_file_3.csv', index=False)
+
+from sklearn.metrics import root_mean_squared_error
+train_pred = reg.predict(X)
+rmse = root_mean_squared_error(y, train_pred)
+print("Training RMSE:", rmse)
+```

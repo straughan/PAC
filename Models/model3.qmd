@@ -1,0 +1,34 @@
+# Model 3 (Categorical Variables)
+
+Some variables that I wanted to include in the second model were categorical and couldn't be processed using the same method. I tried only categorical variables and the RMSE was significantly worse than the numeric only version.
+
+```{python}
+#| warning: false
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Read data
+data = pd.read_csv('../PACFiles/analysis_data.csv')
+
+# Encode categorical variables
+X = pd.get_dummies(data.drop(['customer_id', 'monthly_spend', 'age', 'num_children', 'credit_score', 'owns_home', 'annual_income', 'has_auto_loan', 'num_credit_cards', 'credit_limit', 'num_transactions', 'tenure', 'avg_transaction_value', 'reward_points_balance', 'travel_frequency', 'online_shopping_freq', 'utility_payment_count'], axis=1), drop_first=True).fillna(0)
+y = data.monthly_spend
+
+reg = LinearRegression()
+reg.fit(X,y)
+
+scoring_data = pd.read_csv('../PACFiles/scoring_data.csv')
+scoring_X = pd.get_dummies(scoring_data.drop(['customer_id'], axis=1), drop_first=True).fillna(0)
+scoring_X = scoring_X.reindex(columns=X.columns, fill_value=0)
+pred = reg.predict(scoring_X)
+
+# Construct submission
+submission_file = pd.DataFrame({'customer_id': scoring_data.customer_id, 'monthly_spend': pred})
+submission_file.to_csv('../PACFiles/submission_file_4.csv', index=False)
+
+from sklearn.metrics import root_mean_squared_error
+train_pred = reg.predict(X)
+rmse = root_mean_squared_error(y, train_pred)
+print("Training RMSE:", rmse)
+```

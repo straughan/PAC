@@ -1,0 +1,33 @@
+# Model 6 (Feature Selection)
+
+It now feels like time to focus in on suspected high impact variables, including annual_income, avg_transaction_value, num_transactions, and credit_score. I also again included the invented income_interaction variable.
+
+```{python}
+#| warning: false
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+data = pd.read_csv('../PACFiles/analysis_data.csv')
+features = ['annual_income', 'avg_transaction_value', 'num_transactions', 
+                     'credit_score']
+X = data[features].fillna(data[features].median())
+X['income_interaction'] = X['num_transactions'] * X['avg_transaction_value']
+y = data.monthly_spend
+
+reg = LinearRegression()
+reg.fit(X,y)
+
+scoring_data = pd.read_csv('../PACFiles/scoring_data.csv')
+scoring_X = scoring_data[features].fillna(data[features].median())
+scoring_X['income_interaction'] = scoring_X['num_transactions'] * scoring_X['avg_transaction_value']
+pred = reg.predict(scoring_X)
+
+submission_file = pd.DataFrame({'customer_id': scoring_data.customer_id, 'monthly_spend': pred})
+submission_file.to_csv('../PACFiles/submission_file_7.csv', index=False)
+
+from sklearn.metrics import root_mean_squared_error
+train_pred = reg.predict(X)
+rmse = root_mean_squared_error(y, train_pred)
+print("Training RMSE:", rmse)
+```

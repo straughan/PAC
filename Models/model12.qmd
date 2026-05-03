@@ -1,0 +1,47 @@
+# Model 12 (SVR)
+
+An attempt at using support vector machines. Interestingly this turned out to be the worst performing model.
+
+```{python}
+#| warning: false
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVR
+from sklearn.metrics import root_mean_squared_error
+
+# Read data
+data = pd.read_csv('../PACFiles/analysis_data.csv')
+
+X_raw = pd.get_dummies(data.drop(['customer_id', 'monthly_spend'], axis = 1), drop_first=True).fillna(0)
+y = data['monthly_spend']
+X_train_raw, X_test_raw, y_train, y_test = train_test_split(X_raw, y, test_size=0.3, random_state=617)
+scale = StandardScaler()
+scale.fit(X_train_raw)
+X_train = scale.transform(X_train_raw)
+X_test = scale.transform(X_test_raw)
+
+model = SVR(kernel = 'rbf', C = 1, gamma=0.1) 
+model.fit(X_train, y_train)
+
+scoring_data = pd.read_csv('../PACFiles/scoring_data.csv')
+scoring_X_raw = pd.get_dummies(scoring_data.drop(['customer_id'], axis=1), drop_first=True).fillna(0)
+
+scoring_X_raw = scoring_X_raw.reindex(columns=X_raw.columns, fill_value=0)
+scoring_X_scaled = scale.transform(scoring_X_raw)
+
+final_predictions = model.predict(scoring_X_scaled)
+
+# Construct submission
+submission_file = pd.DataFrame({'customer_id': scoring_data.customer_id, 'monthly_spend': final_predictions})
+submission_file.to_csv('../PACFiles/submission_file_13.csv', index=False)
+
+pred_train = model.predict(X_train)
+pred_test = model.predict(X_test)
+rmse_train = root_mean_squared_error(y_train, pred_train)
+rmse_test = root_mean_squared_error(y_test, pred_test)
+print("Training RMSE:", rmse_train)
+print("Testing RMSE:", rmse_test)
+```

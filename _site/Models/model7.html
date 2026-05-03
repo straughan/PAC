@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>model2 – PAC</title>
+<title>model7 – PAC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -170,11 +170,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../Models/model8.html">
  <span class="dropdown-text">Model 8 (Ensemble Bagging)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../Models/model9.html">
+ <span class="dropdown-text">Model 9 (Gradient Boost)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Models/model10.html">
+ <span class="dropdown-text">Model 10 (Tree Tuning)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Models/model11.html">
+ <span class="dropdown-text">Model 11 (Optimized Ensemble)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Models/model12.html">
+ <span class="dropdown-text">Model 12 (SVR)</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../report.html"> 
-<span class="menu-text">Report</span></a>
+    <a class="nav-link" href="../Models/best.html"> 
+<span class="menu-text">Best Model</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -195,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Model 2 (Numeric Values)</h1>
+<h1 class="title">Model 7 (Trees)</h1>
 </div>
 
 
@@ -212,71 +228,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Because the first model didn’t improve upon the base model all that much, I tried almost all of the numeric values. This resulted in a significantly better RMSE.</p>
-<div id="12483095" class="cell" data-execution_count="1">
+<p>Previous techniques seem to be approaching a wall, so it’s time to try a decision tree using all variables.</p>
+<div id="fc38f667" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'../PACFiles/analysis_data.csv'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.head())</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.loc[:,[<span class="st">'age'</span>, <span class="st">'num_children'</span>, <span class="st">'credit_score'</span>, <span class="st">'owns_home'</span>, <span class="st">'annual_income'</span>, <span class="st">'has_auto_loan'</span>, <span class="st">'num_credit_cards'</span>, <span class="st">'credit_limit'</span>, <span class="st">'num_transactions'</span>, <span class="st">'tenure'</span>, <span class="st">'avg_transaction_value'</span>, <span class="st">'reward_points_balance'</span>, <span class="st">'travel_frequency'</span>]]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data.monthly_spend</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>reg.fit(X,y)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply model</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>scoring_data <span class="op">=</span> pd.read_csv(<span class="st">'../PACFiles/scoring_data.csv'</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>scoring_data_X <span class="op">=</span> scoring_data.loc[:,[<span class="st">'age'</span>, <span class="st">'num_children'</span>, <span class="st">'credit_score'</span>, <span class="st">'owns_home'</span>, <span class="st">'annual_income'</span>, <span class="st">'has_auto_loan'</span>, <span class="st">'num_credit_cards'</span>, <span class="st">'credit_limit'</span>, <span class="st">'num_transactions'</span>, <span class="st">'tenure'</span>, <span class="st">'avg_transaction_value'</span>, <span class="st">'reward_points_balance'</span>, <span class="st">'travel_frequency'</span>]]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> reg.predict(scoring_data_X)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct submission</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>submission_file <span class="op">=</span> pd.DataFrame({<span class="st">'customer_id'</span>: scoring_data.customer_id, <span class="st">'monthly_spend'</span>: pred})</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>submission_file.to_csv(<span class="st">'../PACFiles/submission_file_3.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> root_mean_squared_error</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>train_pred <span class="op">=</span> reg.predict(X)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> root_mean_squared_error(y, train_pred)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Training RMSE:"</span>, rmse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'../PACFiles/analysis_data.csv'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(data.drop([<span class="st">'customer_id'</span>, <span class="st">'monthly_spend'</span>], axis<span class="op">=</span><span class="dv">1</span>), drop_first<span class="op">=</span><span class="va">True</span>).fillna(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data.monthly_spend</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">617</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>scoring_data <span class="op">=</span> pd.read_csv(<span class="st">'../PACFiles/scoring_data.csv'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>scoring_X <span class="op">=</span> pd.get_dummies(scoring_data.drop([<span class="st">'customer_id'</span>], axis<span class="op">=</span><span class="dv">1</span>), drop_first<span class="op">=</span><span class="va">True</span>).fillna(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>scoring_X <span class="op">=</span> scoring_X.reindex(columns<span class="op">=</span>X.columns, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(scoring_X)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>submission_file <span class="op">=</span> pd.DataFrame({<span class="st">'customer_id'</span>: scoring_data.customer_id, <span class="st">'monthly_spend'</span>: pred})</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>submission_file.to_csv(<span class="st">'../PACFiles/submission_file_8.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> root_mean_squared_error</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>train_pred <span class="op">=</span> model.predict(X)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> root_mean_squared_error(y, train_pred)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Training RMSE:"</span>, rmse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   customer_id  age  gender marital_status  num_children education_level  \
-0     75570383   77  female        married             2     high school   
-1     77915507   52    male        married             0     high school   
-2     31958910   48  female        married             0       bachelors   
-3     76868487   67  female        married             3     high school   
-4     69435006   21  female         single             0       bachelors   
-
-    region employment_status  owns_home  has_auto_loan  ...  credit_limit  \
-0  midwest           student          1              0  ...          1600   
-1     west          employed          1              1  ...          1600   
-2     west           student          1              0  ...          2500   
-3     west           student          1              0  ...          2900   
-4     west          employed          0              0  ...          2300   
-
-   tenure  card_type  num_transactions  avg_transaction_value  \
-0      11   platinum                 5                    102   
-1       1   standard                12                     39   
-2       7   platinum                 9                     26   
-3       7       gold                 6                     41   
-4       8       gold                 8                     44   
-
-  online_shopping_freq  reward_points_balance  travel_frequency  \
-0                  2.0                   2103                 0   
-1                  4.0                   4483                 0   
-2                  5.0                   2383                 1   
-3                  5.0                   3263                 1   
-4                  4.0                   2415                 0   
-
-   utility_payment_count  monthly_spend  
-0                    2.0         573.78  
-1                    1.0         103.15  
-2                    4.0         297.28  
-3                    1.0         353.81  
-4                    NaN         392.83  
-
-[5 rows x 23 columns]
-Training RMSE: 244.4626006333211</code></pre>
+<pre><code>Training RMSE: 156.75179515766087</code></pre>
 </div>
 </div>
 

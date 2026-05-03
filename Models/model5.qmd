@@ -1,0 +1,32 @@
+# Model 5 (Money Movement)
+
+Maybe somehow combining variables will help with prediction. So I tried to determine the amount of money spent by multiplying the number of transactions by the average transaction value.
+
+```{python}
+#| warning: false
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+data = pd.read_csv('../PACFiles/analysis_data.csv')
+X = pd.get_dummies(data.drop(['customer_id', 'monthly_spend'], axis=1), drop_first=True).fillna(0)
+X['money_movement'] = X['num_transactions'] * X['avg_transaction_value']
+y = data.monthly_spend
+
+reg = LinearRegression()
+reg.fit(X,y)
+
+scoring_data = pd.read_csv('../PACFiles/scoring_data.csv')
+scoring_X = pd.get_dummies(scoring_data.drop(['customer_id'], axis=1), drop_first=True).fillna(0)
+scoring_X = scoring_X.reindex(columns=X.columns, fill_value=0)
+scoring_X['money_movement'] = scoring_X['num_transactions'] * scoring_X['avg_transaction_value']
+pred = reg.predict(scoring_X)
+
+submission_file = pd.DataFrame({'customer_id': scoring_data.customer_id, 'monthly_spend': pred})
+submission_file.to_csv('../PACFiles/submission_file_6.csv', index=False)
+
+from sklearn.metrics import root_mean_squared_error
+train_pred = reg.predict(X)
+rmse = root_mean_squared_error(y, train_pred)
+print("Training RMSE:", rmse)
+```
